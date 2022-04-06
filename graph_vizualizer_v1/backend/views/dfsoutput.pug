@@ -1,0 +1,20 @@
+doctype html 
+html 
+    head 
+        title Express | Form Output 
+        meta(charset='UTF-8')
+        meta(name='viewport',content='width=device-width,initial-scale=1.0')
+        style 
+            include app.css
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.20.0/cytoscape.min.js") 
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.20.0/cytoscape.esm.js") 
+    body 
+    h1 Here
+    -var attributes = {};    
+    -console.log("this is working");
+    div#cy()&attributes(attributes)
+    p Name1: #{value.username1}
+    p Name2 : #{value.username2}
+    script
+        include app.js
+    

@@ -1,0 +1,277 @@
+<html>
+    <head>
+        <title>
+            Result Page
+        </title>
+        <link rel="stylesheet" href="style.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.20.0/cytoscape.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.20.0/cytoscape.esm.js"></script>
+        <link href="dfsout.css" rel="stylesheet" />
+    </head>
+    <body>
+        <h1>
+            <u>Visualizer</u>
+        </h1>
+        <h2>
+            Nodes and egdes: <span id="nodes_edges" />
+        </h2>
+        <h2>
+            Edge list: <span id="edges" />
+        </h2>
+        <!-- <h2>
+            Traversal : <span id="traversal" />
+        </h2> -->
+        <!-- <div id="img_name">Working Algorithm</div> -->
+        <div id="algo_img">
+            <img src="bfsalgo.png" alt="" srcset="">
+        </div>
+        <div id="cy"></div>
+        <script>
+            window.addEventListener('load', () => {
+
+                var traversal_list = [];
+// Javascript program to print DFS
+// traversal from a given given
+// graph
+ 
+// This class represents a
+// directed graph using adjacency
+// list representation
+class Graph
+{
+     
+    // Constructor
+    constructor(v)
+    {
+        this.V = v;
+        this.adj = new Array(v);
+        for(let i = 0; i < v; i++)
+            this.adj[i] = [];
+    }
+     
+    // Function to add an edge into the graph
+    addEdge(v, w)
+    {
+         
+        // Add w to v's list.
+        this.adj[v-1].push(w-1);
+        // console.log(this.adj[v-1].length);
+        console.log("here");
+    }
+     
+    // A function used by DFS
+    DFSUtil(v, visited)
+    {
+         console.log(this.adj)
+        // Mark the current node as visited and print it
+        visited[v] = true;
+        // document.write(v + " ");
+        traversal_list.push(v+1);
+  
+        // Recur for all the vertices adjacent to this
+        // vertex
+        // console.log(this.adj[v]);
+        for(let i of this.adj[v].values())
+        {
+            let n = i
+            console.log("Inside for loop")
+            if (!visited[n])
+                this.DFSUtil(n, visited);
+        }
+    }
+     
+    // The function to do DFS traversal.
+    // It uses recursive
+    // DFSUtil()
+    DFS(v)
+    {
+         
+        // Mark all the vertices as
+        // not visited(set as
+        // false by default in java)
+        let visited = new Array(this.V);
+        for(let i = 0; i < this.V; i++)
+            visited[i] = false;
+  
+        // Call the recursive helper
+        // function to print DFS
+        // traversal
+        this.DFSUtil(v, visited);
+    }
+}
+                
+
+                let nodes_no = 0;
+            let edges_no = 0;
+            var edge_list = [];
+            var final_node_list = [];
+            var final_edge_list = [];
+                const nodes_edges = sessionStorage.getItem('nodes_edges');
+                const edges = sessionStorage.getItem('edges');
+
+
+
+
+//Finding the values of nuber of nodes and number of edges
+let i = 0;
+                while(i<nodes_edges.length && nodes_edges[i]==' '){i++;}
+                for(let j=i;j<nodes_edges.length;j++){
+                    if(nodes_edges[j]!=' '){
+                        nodes_no = (nodes_no*10) + (nodes_edges[j]-'0');
+                        i++;
+                    }
+                    else break;
+                }
+                while(i<nodes_edges.length && nodes_edges[i]==' '){i++;}
+                for(let j=i;j<nodes_edges.length;j++){
+                    if(nodes_edges[j]!=' '){
+                        edges_no = (edges_no*10) + (nodes_edges[j]-'0');
+                        i++;
+                    }
+                    else break;
+                }
+                console.log(nodes_no);
+                console.log(edges_no);
+
+
+                // Finding the value of the edge list
+                i=0;
+                while(i<edges.length){
+                    let tmp=0;
+                    if(edges[i]==' ') i++;
+                    else{
+                       for(let j=i;j<edges.length;j++){
+                            if(edges[j]!=' '){
+                                tmp = (tmp*10) + (edges[j]-'0');
+                                i++;
+                            }
+                            else break;
+                        }
+                        edge_list.push(tmp);
+                    }
+                }
+
+                console.log("Hello")
+                console.log(edge_list);
+
+
+                // Driver Code
+g = new Graph(nodes_no);
+
+for(let j=0;j<edge_list.length;j++){
+    g.addEdge(edge_list[j],edge_list[j+1]);
+}
+
+// g.addEdge(0, 1);
+// g.addEdge(0, 2);
+// g.addEdge(1, 2);
+// g.addEdge(2, 0);
+// g.addEdge(2, 3);
+// g.addEdge(3, 3);
+ 
+// document.write("Following is Depth First Traversal " +
+//                "(starting from vertex 2)<br>");
+ 
+// g.DFS(1);
+// console.log("traversal list is:");
+// console.log(traversal_list)
+ 
+// This code is contributed by avanitrachhadiya2155
+
+
+                document.getElementById('nodes_edges').innerHTML = nodes_edges;
+                document.getElementById('edges').innerHTML = edges;
+                // document.getElementById('traversal').insnerHTML = traversal_list;
+
+
+                
+
+
+                
+
+
+                // Filling value of nodes to feed in cytoscape function
+                for(let i=1;i<=nodes_no;i++){
+                    final_node_list.push({ data : { id : i } });
+                }
+                console.log(final_node_list);
+
+
+
+                // Filling the value of edges to feed in cytoscpace function
+                for(let i=0;i<edge_list.length;i=i+2){
+                    let x = (i+400).toString();
+                    final_edge_list.push({ data : { id:x , weight:1 , source:edge_list[i].toString() , target:edge_list[i+1].toString() } });
+                }
+                console.log(final_edge_list);
+
+
+            // })
+            var cy = cytoscape({
+            container: document.getElementById('cy'),
+  
+            boxSelectionEnabled: false,
+            autounselectify: true,
+  
+            style: cytoscape.stylesheet()
+            .selector('node')
+            .style({
+                'content': 'data(id)'
+            })
+            .selector('edge')
+            .style({
+                'curve-style': 'bezier',
+                'target-arrow-shape': 'triangle',
+                'width': 4,
+                'line-color': '#ddd',
+                'target-arrow-color': '#ddd'
+            })
+            .selector('.highlighted')
+            .style({
+                'background-color': '#61bffc',
+                'line-color': '#61bffc',
+                'target-arrow-color': '#61bffc',
+                'transition-property': 'background-color, line-color, target-arrow-color',
+                'transition-duration': '0.5s'
+            }),
+            elements: {
+                nodes : final_node_list,
+                edges : final_edge_list
+            // nodes: [
+            //     { data: { id: 1 } },
+            //     { data: { id: 2 } },
+            //     { data: { id: 3 } },
+            //     { data: { id: 4 } },
+            //     { data: { id: 5 } }
+            // ],
+            // edges: [
+            //     { data: { id: 'ae', weight: 1, source: 'a', target: 'e' } },
+            //     { data: { id: 'ab', weight: 3, source: 'a', target: 'b' } },
+            //     { data: { id: 'be', weight: 4, source: 'b', target: 'e' } },
+            //     { data: { id: 'bc', weight: 5, source: 'b', target: 'c' } },
+            //     { data: { id: 'ce', weight: 6, source: 'c', target: 'e' } },
+            //     { data: { id: 'cd', weight: 2, source: 'c', target: 'd' } },
+            //     { data: { id: 'de', weight: 7, source: 'd', target: 'e' } }
+            // ]
+        },  
+        layout: {
+            name: 'breadthfirst',
+            directed: true,
+            roots: '#1',
+            padding: 10
+        }
+    });
+    var dfs = cy.elements().bfs('#1', function(){}, true);  
+    i = 0;
+    var highlightNextEle = function(){
+    if( i < dfs.path.length ){
+        dfs.path[i].addClass('highlighted');
+        i++;
+        setTimeout(highlightNextEle, 1000);
+    }
+  };
+  highlightNextEle();
+})
+        </script>
+    </body>
+</html>

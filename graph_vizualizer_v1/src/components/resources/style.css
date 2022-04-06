@@ -1,0 +1,59 @@
+div.head{
+    margin-top: 2rem;
+    
+}
+div.theory{
+    border: 2px solid black;
+    border-radius: 1.5rem;
+    background-color: rgb(240, 238, 235);
+    margin-left: 4rem;
+    margin-right: 4rem;
+    margin-top: 3rem;
+}
+div.overview{
+    border: 2px solid rgb(136, 143, 99);
+    border-radius: 1.5rem;
+    padding: 20px;
+    margin: 6px;
+
+}
+div.application{
+    border: 2px solid rgb(136, 143, 99);
+    border-radius: 1.5rem;
+    padding: 20px;
+    margin: 6px;
+}
+div.img_exp{
+    border: 2px solid rgb(136, 143, 99);
+    border-radius: 1.5rem;
+    padding: 20px;
+    margin: 6px;
+}
+
+
+div.theory h2{
+    font-size: 1.6rem;
+    font-family: 'Times New Roman', Times, serif;
+}
+div.pseudocode{
+    border: 2px solid rgb(136, 143, 99);
+    border-radius: 1.5rem;
+    padding: 20px;
+    margin: 6px;
+}
+
+div.image_bfs{
+    border: 2px solid rgb(136, 143, 99);
+    border-radius: 1.5rem;
+    padding: 20px;
+    margin: 6px;
+    
+}
+
+div.image_dfs{
+    border: 2px solid rgb(136, 143, 99);
+    border-radius: 1.5rem;
+    padding: 20px;
+    margin: 6px;
+    
+}

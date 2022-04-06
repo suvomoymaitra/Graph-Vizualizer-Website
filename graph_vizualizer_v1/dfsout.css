@@ -1,0 +1,46 @@
+body {
+    min-height: 100%;
+    background-color:rgb(249, 244, 235)
+}
+
+
+
+#cy {
+    height: 50%;
+    width: 50%;
+    padding-left: 20%;padding-right: 20%;
+    padding-top: 10%;padding-bottom: 20%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  h1{
+      text-align: center;
+      margin-top: 14px;
+      font-family: 'Times New Roman', Times, serif;
+      color: rgb(156, 94,238 );
+      font-size: 3rem;
+  }
+  h2{
+      margin-left: 0px;
+      margin-top: 50px;
+      padding-left: 34px;
+      color: rgb(0, 0, 0);
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 1.5rem;
+  }
+  
+  #algo_img{
+
+    margin-left: 1050px;
+    padding-left: 10px;
+    margin-top: -50px;
+  }
+
+  #img_name{
+      border: 2px solid black;
+      padding: 10px;
+      margin-left: 1550px;
+      margin-top: -80px;
+  }
